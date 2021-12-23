@@ -1,0 +1,29 @@
+.video-js {
+  .vjs-screenshot {
+    font-family: 'VideoJS';
+    cursor: pointer;
+    font-weight: 400;
+    font-style: normal;
+
+    ::before {
+      padding-top: 6px;
+      content: '截图';
+      font-size: 12px;
+    }
+  }
+
+  .vjs-v6,
+  .vjs-v7 {
+    .vjs-screenshot {
+      ::before {
+        content: none;
+      }
+
+      .vjs-icon-placeholder::before {
+        padding-top: 6px;
+        content: '截图';
+        font-size: 12px;
+      }
+    }
+  }
+}
