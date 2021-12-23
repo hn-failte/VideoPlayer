@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=100%, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=100%, initial-scale=1.0" />
     <title>CoolPlayer</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.css">
-    <link rel="stylesheet" href="../dist/VideoPlayer.css">
-</head>
-<body>
-    <div style="width: 800px; height: 680px;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.css" />
+    <link rel="stylesheet" href="../dist/VideoPlayer.css" />
+  </head>
+  <body>
+    <div style="width: 800px; height: 680px">
       <video id="video-js" class="video-js">
         <p class="vjs-no-js">
           To view this video please enable JavaScript, and consider upgrading to a web browser that
-          <a
-            href="https://videojs.com/html5-video-support/"
-            target="_blank"
-          >supports HTML5 video</a>
+          <a href="https://videojs.com/html5-video-support/" target="_blank"
+            >supports HTML5 video</a
+          >
         </p>
       </video>
     </div>
     <script type="module">
-        import VideoPlayer from '../dist/VideoPlayer.js'
-        import '../dist/playlistPlugin.js'
-        import '../dist/CustomMenuPlugin.js'
-        import '../dist/markerPlugin.js'
-        import '../dist/screenshotPlugin.js'
-        window.onload = () => {
-            let player = new VideoPlayer({
-                el: document.getElementById('video-js'),
-                options: {
-                    notSupportedMessage: '暂不支持播放该视频',
-                },
-                source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
-            })
-            player.init()
-        }
+      import VideoPlayer from '../dist/VideoPlayer.js'
+      import '../dist/playlistPlugin.js'
+      import '../dist/CustomMenuPlugin.js'
+      import '../dist/markerPlugin.js'
+      import '../dist/screenshotPlugin.js'
+      window.onload = () => {
+        let player = new VideoPlayer({
+          el: document.getElementById('video-js'),
+          options: {
+            notSupportedMessage: '暂不支持播放该视频'
+          },
+          source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
+        })
+        player.init()
+      }
     </script>
-</body>
+  </body>
 </html>
