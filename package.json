@@ -12,8 +12,8 @@
   "main": "index.js",
   "module": "dist/es/video-player/index.js",
   "scripts": {
-    "dev": "rollup -c rollup.config.js --environment TARGET:dev",
-    "build": "rollup -c rollup.config.js --environment TARGET:build"
+    "dev": "rollup -w -c rollup.config.js --environment TARGET:dev",
+    "build": "rollup -c rollup.config.js --environment TARGET:prod"
   },
   "author": "hn-failte<failteku@gmail.com>",
   "repository": {
