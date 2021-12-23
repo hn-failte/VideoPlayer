@@ -10,7 +10,7 @@
     "player"
   ],
   "main": "index.js",
-  "module": "dist/es/video-player/index.js",
+  "module": "dist/VideoPlayer.js",
   "scripts": {
     "dev": "rollup -w -c rollup.config.js --environment TARGET:dev",
     "build": "rollup -c rollup.config.js --environment TARGET:prod"
