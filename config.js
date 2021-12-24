@@ -1,9 +1,9 @@
 const path = require('path')
 const buble = require('rollup-plugin-buble')
 const alias = require('rollup-plugin-alias')
-const cjs = require('rollup-plugin-commonjs')
+// const cjs = require('rollup-plugin-commonjs')
 const replace = require('rollup-plugin-replace')
-const { nodeResolve } = require('@rollup/plugin-node-resolve')
+// const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const less = require('rollup-plugin-less')
 const typescript = require('rollup-plugin-typescript2')
 const { terser } = require('rollup-plugin-terser')
@@ -30,7 +30,7 @@ const resolve = p => {
 const builds = {
   'video-player': {
     entry: resolve('src/index.ts'),
-    dest: resolve('dist/video-player.js'),
+    dest: resolve('dist/es/video-player.js'),
     format: 'es',
     transpile: true,
     env: 'production',
@@ -39,16 +39,16 @@ const builds = {
   },
   'custom-menu-plugin': {
     entry: resolve('src/plugins/videojs-custom-menu/plugin.ts'),
-    dest: resolve('dist/custom-menu-plugin.js'),
+    dest: resolve('dist/es/custom-menu-plugin.js'),
     format: 'es',
     transpile: true,
     env: 'production',
     external: ['video.js'],
     banner
   },
-  'videojs-marker-plugin': {
+  'marker-plugin': {
     entry: resolve('src/plugins/videojs-marker/plugin.ts'),
-    dest: resolve('dist/videojs-marker-plugin.js'),
+    dest: resolve('dist/es/videojs-marker-plugin.js'),
     format: 'es',
     transpile: true,
     env: 'production',
@@ -57,7 +57,7 @@ const builds = {
   },
   'playlist-plugin': {
     entry: resolve('src/plugins/videojs-playlist/plugin.ts'),
-    dest: resolve('dist/playlist-plugin.js'),
+    dest: resolve('dist/es/playlist-plugin.js'),
     format: 'es',
     transpile: true,
     env: 'production',
@@ -66,11 +66,76 @@ const builds = {
   },
   'screenshot-plugin': {
     entry: resolve('src/plugins/videojs-screenshot/plugin.ts'),
-    dest: resolve('dist/screenshot-plugin.js'),
+    dest: resolve('dist/es/screenshot-plugin.js'),
     format: 'es',
     transpile: true,
     env: 'production',
     external: ['video.js'],
+    banner
+  },
+  'video-player-umd': {
+    entry: resolve('src/index.ts'),
+    dest: resolve('dist/umd/video-player.umd.min.js'),
+    format: 'umd',
+    moduleName: 'VideoPlayer',
+    transpile: false,
+    env: 'production',
+    external: ['video.js'],
+    globals: {
+      'video.js': 'videojs'
+    },
+    banner
+  },
+  'custom-menu-plugin-umd': {
+    entry: resolve('src/plugins/videojs-custom-menu/plugin.ts'),
+    dest: resolve('dist/umd/custom-menu-plugin.umd.min.js'),
+    format: 'umd',
+    moduleName: 'CustomMenuPlugin',
+    transpile: false,
+    env: 'production',
+    external: ['video.js'],
+    globals: {
+      'video.js': 'videojs'
+    },
+    banner
+  },
+  'marker-plugin-umd': {
+    entry: resolve('src/plugins/videojs-marker/plugin.ts'),
+    dest: resolve('dist/umd/videojs-marker-plugin.umd.min.js'),
+    format: 'umd',
+    moduleName: 'MarkerPlugin',
+    transpile: false,
+    env: 'production',
+    external: ['video.js'],
+    globals: {
+      'video.js': 'videojs'
+    },
+    banner
+  },
+  'playlist-plugin-umd': {
+    entry: resolve('src/plugins/videojs-playlist/plugin.ts'),
+    dest: resolve('dist/umd/playlist-plugin.umd.min.js'),
+    format: 'umd',
+    moduleName: 'PlaylistPlugin',
+    transpile: false,
+    env: 'production',
+    external: ['video.js'],
+    globals: {
+      'video.js': 'videojs'
+    },
+    banner
+  },
+  'screenshot-plugin-umd': {
+    entry: resolve('src/plugins/videojs-screenshot/plugin.ts'),
+    dest: resolve('dist/umd/screenshot-plugin.umd.min.js'),
+    format: 'umd',
+    moduleName: 'ScreenshotPlugin',
+    transpile: false,
+    env: 'production',
+    external: ['video.js'],
+    globals: {
+      'video.js': 'videojs'
+    },
     banner
   }
 }
@@ -85,7 +150,8 @@ function genConfig(name) {
       ...(opts.dist ? { dir: opts.dist } : { file: opts.dest }),
       format: opts.format,
       banner: opts.banner,
-      name: opts.moduleName || 'VideoPlayer'
+      globals: opts.globals,
+      name: opts.moduleName
     },
     onwarn: (msg, warn) => {
       if (!/Circular/.test(msg)) {
@@ -103,10 +169,11 @@ function genConfig(name) {
     vars['process.env.NODE_ENV'] = JSON.stringify(opts.env)
   }
   config.plugins.push(
-    ...(opts.env === 'development' ? [cjs(), nodeResolve()] : []),
+    // cjs(),
+    // nodeResolve(),
     replace(vars),
     less({
-      output: resolve('dist/VideoPlayer.css')
+      output: resolve(`dist/${opts.format}/${name}.css`)
     }),
     typescript({
       tsconfigDefaults: { compilerOptions: { declaration: true } },

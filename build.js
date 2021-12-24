@@ -1,90 +1,42 @@
 const fs = require('fs')
 const path = require('path')
-const zlib = require('zlib')
-const rollup = require('rollup')
-const terser = require('terser')
+const { rollup } = require('rollup')
 
 if (!fs.existsSync('dist')) {
   fs.mkdirSync('dist')
 }
 
-let builds = require('./config').getAllBuilds()
+process.env.build_format = process.argv[2] || ''
+
+const builds = require('./config')
+  .getAllBuilds()
+  .filter(b => (process.env.build_format ? b.output.format === process.env.build_format : true))
 
 build(builds)
 
-function build(builds) {
-  let built = 0
-  const total = builds.length
-  const next = () => {
-    buildEntry(builds[built])
-      .then(() => {
-        built++
-        if (built < total) {
-          next()
-        }
-      })
-      .catch(logError)
-  }
-
-  next()
+async function build(builds) {
+  for (const build of builds) await buildEntry(build).catch(e => console.log(e))
 }
 
 function buildEntry(config) {
-  const output = config.output
-  const { file, banner } = output
-  const isProd = /(min|prod)\.js$/.test(file)
-  return rollup
-    .rollup(config)
-    .then(bundle => bundle.generate(output))
-    .then(({ output: [{ code }] }) => {
-      if (isProd) {
-        const minified =
-          (banner ? banner + '\n' : '') +
-          terser.minify(code, {
-            toplevel: true,
-            output: {
-              ascii_only: true
-            },
-            compress: {
-              pure_funcs: ['makeMap']
-            }
-          }).code
-        return write(file, minified, true)
-      } else {
-        return write(file, code)
-      }
-    })
+  const { output } = config
+  return rollup(config)
+    .then(bundle => bundle.write(output))
+    .then(() => console.log(chalk(`${output.file} build success`, 'green')))
 }
 
-function write(dest, code, zip) {
-  return new Promise((resolve, reject) => {
-    function report(extra) {
-      console.log(blue(path.relative(process.cwd(), dest)) + ' ' + getSize(code) + (extra || ''))
-      resolve()
-    }
-
-    fs.writeFile(dest, code, err => {
-      if (err) return reject(err)
-      if (zip) {
-        zlib.gzip(code, (err, zipped) => {
-          if (err) return reject(err)
-          report(' (gzipped: ' + getSize(zipped) + ')')
-        })
-      } else {
-        report()
-      }
-    })
-  })
-}
-
-function getSize(code) {
-  return (code.length / 1024).toFixed(2) + 'kb'
-}
-
-function logError(e) {
-  console.log(e)
-}
-
-function blue(str) {
-  return '\x1b[1m\x1b[34m' + str + '\x1b[39m\x1b[22m'
+function chalk(str, type) {
+  const head = '\x1b[1m'
+  const foot = '\x1b[39m\x1b[22m'
+  const getStr = c => head + c + str + foot
+  return {
+    white: getStr('\x1b[29m'),
+    gray: getStr('\x1b[30m'),
+    red: getStr('\x1b[31m'),
+    green: getStr('\x1b[32m'),
+    yellow: getStr('\x1b[33m'),
+    blue: getStr('\x1b[34m'),
+    purpose: getStr('\x1b[35m'),
+    indigo: getStr('\x1b[36m')
+  }[type]
 }

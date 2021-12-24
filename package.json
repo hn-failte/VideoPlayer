@@ -12,8 +12,11 @@
   "main": "index.js",
   "module": "dist/VideoPlayer.js",
   "scripts": {
-    "dev": "nodemon build.js --watch src",
-    "build": "node build.js"
+    "dev": "nodemon build.js --watch src  --environment TAEGET:dev",
+    "build": "node build.js",
+    "build:all": "node build.js",
+    "build:es": "node build.js es",
+    "build:umd": "node build.js umd"
   },
   "author": "hn-failte<failteku@gmail.com>",
   "repository": {

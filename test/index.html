@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=100%, initial-scale=1.0" />
     <title>CoolPlayer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.css" />
-    <link rel="stylesheet" href="../dist/VideoPlayer.css" />
+    <link rel="stylesheet" href="../dist/umd/custom-menu-plugin-umd.css" />
+    <link rel="stylesheet" href="../dist/umd/marker-plugin-umd.css" />
+    <link rel="stylesheet" href="../dist/umd/screenshot-plugin-umd.css" />
   </head>
   <body>
     <div style="width: 800px; height: 680px">
@@ -19,12 +21,13 @@
         </p>
       </video>
     </div>
-    <script type="module">
-      import VideoPlayer from '../dist/VideoPlayer.js'
-      import '../dist/playlistPlugin.js'
-      import '../dist/CustomMenuPlugin.js'
-      import '../dist/markerPlugin.js'
-      import '../dist/screenshotPlugin.js'
+    <script src="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video.js"></script>
+    <script src="../dist/umd/video-player.umd.min.js"></script>
+    <script src="../dist/umd/playlist-plugin.umd.min.js"></script>
+    <script src="../dist/umd/custom-menu-plugin.umd.min.js"></script>
+    <script src="../dist/umd/screenshot-plugin.umd.min.js"></script>
+    <script src="../dist/umd/videojs-marker-plugin.umd.min.js"></script>
+    <script>
       window.onload = () => {
         let player = new VideoPlayer({
           el: document.getElementById('video-js'),

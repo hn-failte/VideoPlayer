@@ -23,9 +23,9 @@ A Video Player Base on video.js
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useModal } from '/@/components/Modal';
-const [registerVideoPlayerModal, { openModal: openVideoPlayerModal }] = useModal();
+import { defineComponent } from 'vue'
+import { useModal } from '/@/components/Modal'
+const [registerVideoPlayerModal, { openModal: openVideoPlayerModal }] = useModal()
 
 export default defineComponent({
   setup() {
@@ -33,26 +33,26 @@ export default defineComponent({
       {
         label: '下载',
         action(detail) {
-          console.log(detail, 'detail');
-        },
+          console.log(detail, 'detail')
+        }
       },
       {
         label: '移动',
         action(detail) {
-          console.log(detail, 'detail');
-        },
-      },
-    ];
+          console.log(detail, 'detail')
+        }
+      }
+    ]
     const play = () => {
       openVideoPlayerModal(true, {
         fileId: 'xxx',
-        fileDownloadPath: 'xxx.m3u8',
-      });
+        fileDownloadPath: 'xxx.m3u8'
+      })
     }
     return {
       customMenu,
       play,
-      openVideoPlayerModal,
+      openVideoPlayerModal
     }
   }
 })
@@ -70,44 +70,46 @@ to be update
 4、use in javascript project
 
 add styles in head
+
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.css">
-<link rel="stylesheet" href="../dist/VideoPlayer.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.css" />
+<link rel="stylesheet" href="../dist/umd/custom-menu-plugin-umd.css" />
+<link rel="stylesheet" href="../dist/umd/marker-plugin-umd.css" />
+<link rel="stylesheet" href="../dist/umd/screenshot-plugin-umd.css" />
 ```
 
 create container
+
 ```html
 <div style="width: 800px; height: 680px;">
   <video id="video-js" class="video-js">
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a web browser that
-      <a
-        href="https://videojs.com/html5-video-support/"
-        target="_blank"
-      >supports HTML5 video</a>
+      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
     </p>
   </video>
 </div>
 ```
 
 main code
+
 ```html
-<!-- notice: here use esm -->
-<script type="module">
-    import VideoPlayer from '../dist/VideoPlayer.js'
-    import '../dist/playlistPlugin.js'
-    import '../dist/CustomMenuPlugin.js'
-    import '../dist/markerPlugin.js'
-    import '../dist/screenshotPlugin.js'
-    window.onload = () => {
-        let player = new VideoPlayer({
-            el: document.getElementById('video-js'),
-            options: {
-                notSupportedMessage: '暂不支持播放该视频',
-            },
-            source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
-        })
-        player.init()
-    }
+<script src="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video.js"></script>
+<script src="../dist/umd/video-player.umd.min.js"></script>
+<script src="../dist/umd/playlist-plugin.umd.min.js"></script>
+<script src="../dist/umd/custom-menu-plugin.umd.min.js"></script>
+<script src="../dist/umd/screenshot-plugin.umd.min.js"></script>
+<script src="../dist/umd/videojs-marker-plugin.umd.min.js"></script>
+<script>
+  window.onload = () => {
+    let player = new VideoPlayer({
+      el: document.getElementById('video-js'),
+      options: {
+        notSupportedMessage: '暂不支持播放该视频'
+      },
+      source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
+    })
+    player.init()
+  }
 </script>
 ```
