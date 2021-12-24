@@ -32,7 +32,7 @@ A Video Player Base on video.js
 
 
 ```js
-import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
+import VideoPlayer from 'vjs-videoplayer'
 import zhCN from 'video.js/dist/lang/zh-CN.json'
 import 'vjs-videoplayer/dist/es/playlist-plugin'
 import 'vjs-videoplayer/dist/es/marker-plugin'
@@ -121,7 +121,7 @@ export default defineComponent({
 3、use in react project
 
 ```js
-import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
+import VideoPlayer from 'vjs-videoplayer'
 import zhCN from 'video.js/dist/lang/zh-CN.json'
 import 'vjs-videoplayer/dist/es/playlist-plugin'
 import 'vjs-videoplayer/dist/es/marker-plugin'
