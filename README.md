@@ -8,11 +8,70 @@ A Video Player Base on video.js
 
 `yarn build`: Which will build package, but this package must based on video.js, which means util you introduce video.js, and this package can run normally.
 
+## install
+
+`yarn add vjs-videoplayer` or `npm i vjs-videoplayer`
+
 ## Usage
 
-1、use in vue3 project, such as `vben` framework
+1、use in vue2 project
 
-**Nitoce**: useVideoPlayer、VideoPlayer and VideoPlayerModal was only provided to vben! You can find demos in `src/vben/*`.
+```html
+<div id="app">
+  <video class="video-js" ref="el">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a
+        href="https://videojs.com/html5-video-support/"
+        target="_blank"
+      >supports HTML5 video</a>
+    </p>
+  </video>
+</div>
+```
+
+
+```js
+import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
+import zhCN from 'video.js/dist/lang/zh-CN.json'
+import 'vjs-videoplayer/dist/es/playlist-plugin'
+import 'vjs-videoplayer/dist/es/videojs-marker-plugin'
+import 'vjs-videoplayer/dist/es/screenshot-plugin'
+import 'vjs-videoplayer/dist/es/custom-menu-plugin'
+import 'video.js/dist/video-js.css'
+import 'vjs-videoplayer/dist/es/marker-plugin.css'
+import 'vjs-videoplayer/dist/es/screenshot-plugin.css'
+import 'vjs-videoplayer/dist/es/custom-menu-plugin.css'
+
+export default {
+  name: 'App',
+  mounted() {
+    new VideoPlayer({
+      el: this.$refs.el,
+      options: {
+        notSupportedMessage: '暂不支持播放该视频',
+        // 多语言，videojs 默认为英文，播放器默认为中文，因此需要提供中文翻译
+        languages: {
+          'zh-CN': {
+            ...zhCN,
+            'turn-next': '下一个',
+            'turn-last': '上一个',
+            screenshot: '截图',
+            custom: '更多'
+          }
+        }
+      },
+      source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
+    }).init()
+  }
+}
+```
+
+2、use in vue3 project, such as `vben` framework
+
+Some usage like vue2, functional useage like below.
+
+**Nitoce**: useVideoPlayer、VideoPlayer and VideoPlayerModal was only provided to vben! You can find demos in `src/vben/*` of project [VideoPlayer](https://github.com/hn-failte/VideoPlayer/tree/master/src/vben).
 
 ```vue
 <template>
@@ -59,13 +118,57 @@ export default defineComponent({
 </script>
 ```
 
-2、use in vue2 project
-
-to be update
-
 3、use in react project
 
-to be update
+```js
+import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
+import zhCN from 'video.js/dist/lang/zh-CN.json'
+import 'vjs-videoplayer/dist/es/playlist-plugin'
+import 'vjs-videoplayer/dist/es/videojs-marker-plugin'
+import 'vjs-videoplayer/dist/es/screenshot-plugin'
+import 'vjs-videoplayer/dist/es/custom-menu-plugin'
+import 'video.js/dist/video-js.css'
+import 'vjs-videoplayer/dist/es/marker-plugin.css'
+import 'vjs-videoplayer/dist/es/screenshot-plugin.css'
+import 'vjs-videoplayer/dist/es/custom-menu-plugin.css'
+
+export default class extends React.Component {
+  componentDidMount() {
+    new VideoPlayer({
+      el: this.refs.el,
+      options: {
+        notSupportedMessage: '暂不支持播放该视频',
+        // 多语言，videojs 默认为英文，播放器默认为中文，因此需要提供中文翻译
+        languages: {
+          'zh-CN': {
+            ...zhCN,
+            "turn-next": '下一个',
+            "turn-last": '上一个',
+            "screenshot": '截图',
+            "custom": '更多'
+          }
+        }
+      },
+      source: 'http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'
+    }).init()
+  }
+  render() {
+    return (
+      <div id="app">
+        <video class="video-js" ref="el">
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a
+              href="https://videojs.com/html5-video-support/"
+              target="_blank"
+            >supports HTML5 video</a>
+          </p>
+        </video>
+      </div>
+    )
+  }
+}
+```
 
 4、use in javascript project
 

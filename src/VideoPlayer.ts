@@ -105,7 +105,6 @@ export default class VideoPlayer {
       onPlayEnd,
       onDispose,
     } = params || {};
-    console.log(videojs, 'videojs');
     if (hooks) this.hooks = { ...this.hooks, ...hooks };
     if (alert) this.alert = alert;
     this.listenHooks();

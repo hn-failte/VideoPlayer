@@ -48,7 +48,7 @@ const builds = {
   },
   'marker-plugin': {
     entry: resolve('src/plugins/videojs-marker/plugin.ts'),
-    dest: resolve('dist/es/videojs-marker-plugin.js'),
+    dest: resolve('dist/es/marker-plugin.js'),
     format: 'es',
     transpile: true,
     env: 'production',
@@ -101,7 +101,7 @@ const builds = {
   },
   'marker-plugin-umd': {
     entry: resolve('src/plugins/videojs-marker/plugin.ts'),
-    dest: resolve('dist/umd/videojs-marker-plugin.umd.min.js'),
+    dest: resolve('dist/umd/marker-plugin.umd.min.js'),
     format: 'umd',
     moduleName: 'MarkerPlugin',
     transpile: false,

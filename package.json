@@ -1,6 +1,6 @@
 {
   "name": "vjs-videoplayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "A Video Player Base on video.js",
   "files": [
@@ -14,8 +14,8 @@
     "dash",
     "mps"
   ],
-  "main": "index.js",
-  "module": "dist/VideoPlayer.js",
+  "main": "dist/es/video-player.js",
+  "module": "dist/es/video-player.js",
   "scripts": {
     "dev": "nodemon build.js --watch src  --environment",
     "build": "node build.js",
@@ -29,7 +29,8 @@
     "url": "https://github.com/hn-failte/VideoPlayer.git"
   },
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@rollup/plugin-babel": "^5.3.0",
@@ -47,8 +48,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.4",
-    "video.js": "^7.17.0"
-  },
-  "devDependencies": {}
+    "typescript": "^4.5.4"
+  }
 }
