@@ -1,6 +1,6 @@
 {
   "name": "vjs-videoplayer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "A Video Player Base on video.js",
   "files": [

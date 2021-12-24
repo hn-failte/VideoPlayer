@@ -35,7 +35,7 @@ A Video Player Base on video.js
 import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
 import zhCN from 'video.js/dist/lang/zh-CN.json'
 import 'vjs-videoplayer/dist/es/playlist-plugin'
-import 'vjs-videoplayer/dist/es/videojs-marker-plugin'
+import 'vjs-videoplayer/dist/es/marker-plugin'
 import 'vjs-videoplayer/dist/es/screenshot-plugin'
 import 'vjs-videoplayer/dist/es/custom-menu-plugin'
 import 'video.js/dist/video-js.css'
@@ -124,7 +124,7 @@ export default defineComponent({
 import VideoPlayer from 'vjs-videoplayer/dist/es/video-player'
 import zhCN from 'video.js/dist/lang/zh-CN.json'
 import 'vjs-videoplayer/dist/es/playlist-plugin'
-import 'vjs-videoplayer/dist/es/videojs-marker-plugin'
+import 'vjs-videoplayer/dist/es/marker-plugin'
 import 'vjs-videoplayer/dist/es/screenshot-plugin'
 import 'vjs-videoplayer/dist/es/custom-menu-plugin'
 import 'video.js/dist/video-js.css'
@@ -202,7 +202,7 @@ main code
 <script src="../dist/umd/playlist-plugin.umd.min.js"></script>
 <script src="../dist/umd/custom-menu-plugin.umd.min.js"></script>
 <script src="../dist/umd/screenshot-plugin.umd.min.js"></script>
-<script src="../dist/umd/videojs-marker-plugin.umd.min.js"></script>
+<script src="../dist/umd/marker-plugin.umd.min.js"></script>
 <script>
   window.onload = () => {
     let player = new VideoPlayer({
