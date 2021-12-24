@@ -109,7 +109,7 @@ export default class VideoPlayer {
     if (hooks) this.hooks = { ...this.hooks, ...hooks };
     if (alert) this.alert = alert;
     this.listenHooks();
-    this.el = el || document.getElementById('zego-player');
+    this.el = el || document.getElementById('video-player');
     if (options) {
       this.options = videojs.mergeOptions(this.options, options);
     }

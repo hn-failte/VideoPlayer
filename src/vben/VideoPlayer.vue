@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, defineProps, defineEmits } from 'vue';
 import { message } from 'ant-design-vue';
-import ZegoVideoPlayer from '../ZegoVideoPlayer'
+import VideoPlayer from '../VideoPlayer'
 import zhCN from 'video.js/dist/lang/zh-CN.json'
 import 'video.js/dist/video-js.css'
 import '../plugins/videojs-marker/plugin.less'
@@ -24,7 +24,7 @@ import '../plugins/videojs-marker/plugin'
 import '../plugins/videojs-screenshot/plugin'
 import '../plugins/videojs-custom-menu/plugin'
 
-let player: ZegoVideoPlayer | null = null
+let player: VideoPlayer | null = null
 const el = ref()
 
 const emit = defineEmits(['register'])
@@ -34,7 +34,7 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  player = new ZegoVideoPlayer({
+  player = new VideoPlayer({
     el: el.value,
     alert: message.error,
     options: {
@@ -52,7 +52,7 @@ onMounted(() => {
     }
   })
   emit('register', {
-    getPlayerRef: (): ZegoVideoPlayer | null => player
+    getPlayerRef: (): VideoPlayer | null => player
   })
   if (props.playList) player.setPlayList(props.playList)
   else if (props.url) player.setSource(props.url)

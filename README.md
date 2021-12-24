@@ -12,13 +12,13 @@ A Video Player Base on video.js
 
 1、use in vue3 project, such as `vben` framework
 
-**Nitoce**: useZegoVideoPlayer、ZegoVideoPlayer and ZegoVideoPlayerModal was only provided to vben! You can find demos in `src/vben/*`.
+**Nitoce**: useVideoPlayer、VideoPlayer and VideoPlayerModal was only provided to vben! You can find demos in `src/vben/*`.
 
 ```vue
 <template>
   <div>
     <a @click="play">播放</a>
-    <ZegoVideoPlayerModal @register="registerZegoVideoPlayerModal" :customMenu="customMenu" />
+    <VideoPlayerModal @register="registerVideoPlayerModal" :customMenu="customMenu" />
   </div>
 </template>
 
